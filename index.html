@@ -1,55 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Notion Greeting</title>
-    <style>
-        body {
-            background-color: #252525;
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            font-family: Arial, sans-serif;
-            font-size: 2rem;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notion Greeting</title>
+  <style>
+    body {
+      background-color: #252525;
+      color: white;
+      font-size: 24px;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 20px;
+    }
+  </style>
 </head>
 <body>
-    <div id="greeting"></div>
-    <script>
-        const greetingElement = document.getElementById("greeting");
-        const now = new Date();
-        const hour = now.getHours();
-        const month = now.getMonth();
-        const date = now.getDate();
+  <h2 id="greeting"></h2>
 
-        let greeting = "";
+  <script>
+    function updateGreeting() {
+      const today = new Date();
+      const hours = today.getHours();
+      const day = today.getDate();
+      const month = today.getMonth() + 1;
 
-        // Check for special events
-        if (month === 0 && date === 1) {
-            greeting = "Happy New Year!";
-        } else if (month === 0 && date === 29) {
-            greeting = "新年快乐!"; // Chinese New Year
-        } else if (month === 3 && date === 19) {
-            greeting = "Happy Birthday!";
-        } else if (month === 11 && date === 25) {
-            greeting = "Merry Christmas!";
+      let greetingText = "";
+
+      // Event-based Greetings
+      if (month === 1 && day === 1) {
+        greetingText = "Happy New Year! 🎉";
+      } else if (month === 1 && day === 29) {
+        greetingText = "新年快乐! Happy Chinese New Year!";
+      } else if (month === 4 && day === 19) {
+        greetingText = "Happy Birthday! 🎂";
+      } else if (month === 12 && day === 25) {
+        greetingText = "Merry Christmas! 🎄";
+      } else {
+        // Time-based Greetings
+        if (hours < 12) {
+          greetingText = "Good Morning, Wen Jay!";
+        } else if (hours < 18) {
+          greetingText = "Good Afternoon, Wen Jay!";
         } else {
-            // Time-based greetings
-            if (hour < 12) {
-                greeting = "Good Morning, Wen Jay!";
-            } else if (hour < 18) {
-                greeting = "Good Afternoon, Wen Jay!";
-            } else {
-                greeting = "Good Evening, Wen Jay!";
-            }
+          greetingText = "Good Evening, Wen Jay!";
         }
+      }
 
-        greetingElement.textContent = greeting;
-    </script>
+      document.getElementById("greeting").innerText = greetingText;
+    }
+
+    updateGreeting();
+  </script>
 </body>
 </html>
